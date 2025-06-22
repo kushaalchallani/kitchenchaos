@@ -1,42 +1,28 @@
 using TMPro;
 using UnityEngine;
 
-public class ClearCounter : BaseCounter, IKitchenObjectParent {
-
-
+public class ClearCounter : BaseCounter {
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
-    [SerializeField] private Transform counterTopPoint;
 
-    private KitchenObject kitchenObject;
     public override void Interact(Player player) {
-        if (kitchenObject == null) {
-            Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab, counterTopPoint);
-            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(this);
+        //Nothing on the counter
+        if (!HasKitchenObject()) {
+            //Player is carrying smtg
+            if (player.HasKitchenObject()) {
+                player.GetKitchenObject().SetKitchenObjectParent(this);
+            } else {
+                //Player not carrying anything
+            }
         } else {
-            // Give object to player
-            kitchenObject.SetKitchenObjectParent(player);
+            //Something on counter
+            if (player.HasKitchenObject()) {
+                //Player is carrying smtg
+            } else {
+                //Player not carrying anything
+                GetKitchenObject().SetKitchenObjectParent(player);
+            }
         }
-
     }
 
-    public Transform GetKitchenObjectFollowTransform() {
-        return counterTopPoint;
-    }
-
-    public void SetKitchenObject(KitchenObject kitchenObject) {
-        this.kitchenObject = kitchenObject;
-    }
-
-    public KitchenObject GetKitchenObject() {
-        return kitchenObject;
-    }
-
-    public void clearKitchenObject() {
-        kitchenObject = null;
-    }
-
-    public bool HasKitchenObject() {
-        return kitchenObject != null;
-    }
 }
