@@ -9,7 +9,7 @@ public class KitchenObject : MonoBehaviour {
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
         if (this.kitchenObjectParent != null) {
-            this.kitchenObjectParent.clearKitchenObject();
+            this.kitchenObjectParent.ClearKitchenObject();
         }
 
         this.kitchenObjectParent = kitchenObjectParent;
@@ -25,5 +25,19 @@ public class KitchenObject : MonoBehaviour {
 
     public IKitchenObjectParent GetKitchenObjectParent() {
         return kitchenObjectParent;
+    }
+
+    public void DestroySelf() {
+        kitchenObjectParent.ClearKitchenObject();
+        Destroy(gameObject);
+    }
+
+
+    public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
+        Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
+        KitchenObject kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
+        kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
+
+        return kitchenObject;
     }
 }
