@@ -9,6 +9,11 @@ public class SoundManager : MonoBehaviour {
         CuttingCounter.OnAnyCut += CuttingCounter_OnAnyCut;
         Player.Instance.OnPickedSomething += Player_OnPickedSomething;
         BaseCounter.OnAnyObjectPlacedHere += BaseCounter_OnAnyObjectPlacedHere;
+        TrashCounter.OnAnyObjectTrashed += TrashCounter_OnAnyObjectTrashed;
+    }
+    private void TrashCounter_OnAnyObjectTrashed(object sender, System.EventArgs e) {
+        TrashCounter trashCounter = sender as TrashCounter;
+        PlaySound(audioClipsRefsSO.trash, trashCounter.transform.position);
     }
     private void BaseCounter_OnAnyObjectPlacedHere(object sender, System.EventArgs e) {
         BaseCounter baseCounter = sender as BaseCounter;
