@@ -4949,6 +4949,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff426909217bc34fb773784a765246d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resumeButton: {fileID: 1493941676}
+  mainmenuButton: {fileID: 1594507850}
 --- !u!1001 &1695185336
 PrefabInstance:
   m_ObjectHideFlags: 0
